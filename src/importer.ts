@@ -9,7 +9,8 @@ export class Importer {
     const ok: Invoice[] = [];
     const ko: InvoiceError[] = [];
     try {
-      const invoices = this.readAndParseFile(filePath);
+      const fileContent = this.readFile(filePath);
+      const invoices = this.parseFile(fileContent);
       let line = 1;
       for await (const invoice of invoices) {
         const errors = validate(invoice);
@@ -26,9 +27,12 @@ export class Importer {
     }
   }
 
-  private readAndParseFile(filePath: string): Parser {
+  private readFile(filePath: string): string {
     const file = path.join(__dirname, '..', 'files', filePath);
-    const fileContent = fs.readFileSync(file, 'utf8');
+    return fs.readFileSync(file, 'utf8');
+  }
+
+  private parseFile(fileContent: string): Parser {
     const headers = ['code', 'issuedDate', 'ownerName', 'contactName', 'subtotal', 'taxes', 'total', 'status'];
 
     return parse(fileContent, {
