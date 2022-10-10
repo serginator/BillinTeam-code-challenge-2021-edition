@@ -14,7 +14,7 @@ export class Importer {
       let line = 1;
       for await (const invoice of invoices) {
         const errors = validate(invoice);
-        errors ? ko.push({line: line, errors: errors}) : ok.push(invoice);
+        errors.length > 0 ? ko.push({line: line, errors: errors}) : ok.push(invoice);
         line++;
       }
     } catch (error) {

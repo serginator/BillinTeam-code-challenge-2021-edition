@@ -1,6 +1,6 @@
 import { Invoice, PropertyError } from './types'
 
-export function validate(invoice: Invoice): PropertyError[] | boolean {
+export function validate(invoice: Invoice): PropertyError[] {
     const errors: PropertyError[] = [];
 
     if (invoice.code === '') {
@@ -51,5 +51,5 @@ export function validate(invoice: Invoice): PropertyError[] | boolean {
             message: 'invalid'
         });
     }
-    return errors.length ? errors : false;
+    return errors;
 }
