@@ -24,7 +24,7 @@ export function validate(invoice: Invoice): PropertyError[] {
     if (invoice.contactName === '') {
         errors.push({
             property: 'contactName',
-            message: 'invalid'
+            message: 'required'
         });
     }
     if (isNaN(invoice.subtotal)) {
