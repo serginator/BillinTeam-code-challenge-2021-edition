@@ -18,7 +18,7 @@ type PropertyError = {
 
 type InvoiceError = {
   line: number;
-  errors: PropertyError[] | boolean;
+  errors: PropertyError[];
 };
 
 type ImportResult = {
